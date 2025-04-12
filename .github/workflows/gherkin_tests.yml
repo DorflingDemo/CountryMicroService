@@ -19,7 +19,11 @@ jobs:
         node-version: '18' # Choose a suitable LTS Node.js version
 
     - name: Install dependencies
-      run: npm install # Installs dependencies listed in package.json
+      run: npm install # Installs dependencies listed in package.json, including dotenv
+
+    - name: Create .env file
+      run: echo "API_KEY=${{ secrets.API_KEY }}" > .env
+      # This creates the .env file using the secret stored in GitHub repository settings
 
     - name: Build TypeScript
       run: npm run build # Compile TypeScript to JavaScript

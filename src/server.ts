@@ -34,8 +34,30 @@ if (fs.existsSync(countriesDataPath)) { // Added check
     // For now, log the error and continue with an empty array.
 }
 
-// Define the /countries route
-app.get('/countries', (req: Request, res: Response) => {
+// --- Authentication Middleware ---
+const authenticateAPIKey = (req: Request, res: Response, next: NextFunction) => {
+    const apiKey = process.env.API_KEY;
+    const providedKey = req.headers['x-api-key']; // Check for key in X-API-Key header
+
+    if (!apiKey) {
+        // Should not happen if .env is set up correctly, but good practice to check
+        console.error('FATAL: API_KEY environment variable is not set.');
+        return res.status(500).json({ error: 'Server configuration error' });
+    }
+
+    if (!providedKey || providedKey !== apiKey) {
+        console.warn(`Unauthorized access attempt: Missing or incorrect API key. Provided: ${providedKey}`);
+        return res.status(401).json({ error: 'Unauthorized: Invalid API Key' });
+    }
+
+    // Key is valid, proceed to the next middleware or route handler
+    next();
+};
+
+// --- Routes ---
+
+// Apply authentication middleware to the /countries route
+app.get('/countries', authenticateAPIKey, (req: Request, res: Response) => {
     // Set content type to application/json
     res.setHeader('Content-Type', 'application/json');
     // Send a 200 OK status with the loaded country data

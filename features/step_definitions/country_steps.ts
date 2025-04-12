@@ -34,10 +34,21 @@ Given(/^the Country\/Currency service is running$/, function () {
 When('I send a GET request to {string}', async function (this: ICustomWorld, path: string) {
     try {
         const url = `${API_BASE_URL}${path}`;
-        console.log(`Sending GET request to: ${url}`);
-        this.response = await axios.get(url, {
+        const apiKey = process.env.API_KEY;
+
+        if (!apiKey) {
+            throw new Error('API_KEY environment variable is not set for tests.');
+        }
+
+        const config: AxiosRequestConfig = {
+            headers: {
+                'X-API-Key': apiKey // Add the API key header
+            },
             validateStatus: () => true, // Accept all status codes, validate in 'Then' steps
-        });
+        };
+
+        console.log(`Sending GET request to: ${url} with API Key`);
+        this.response = await axios.get(url, config);
         // Attempt to parse JSON response data
         if (this.response.headers['content-type']?.includes('application/json')) {
             this.responseData = this.response.data;
@@ -104,4 +115,56 @@ Then(/^the response list should contain an entry with "([^"]*)" "([^"]*)"$/, fun
     });
 
     assert.ok(found, `Expected to find an item with ${key}="${value}", but none found.`);
+});
+
+// --- Steps for Unauthorized Access ---
+
+When('I send a GET request to {string} without an API Key', async function (this: ICustomWorld, path: string) {
+    try {
+        const url = `${API_BASE_URL}${path}`;
+        const config: AxiosRequestConfig = {
+            // No 'X-API-Key' header
+            validateStatus: () => true,
+        };
+        console.log(`Sending GET request to: ${url} WITHOUT API Key`);
+        this.response = await axios.get(url, config);
+        if (this.response.headers['content-type']?.includes('application/json')) {
+            this.responseData = this.response.data;
+        } else {
+            this.responseData = null;
+        }
+        this.error = undefined;
+        console.log(`Received status code: ${this.response.status}`);
+    } catch (err) {
+        console.error('Error during GET request (no key):', err);
+        this.error = err;
+        this.response = undefined;
+        this.responseData = undefined;
+    }
+});
+
+When('I send a GET request to {string} with an invalid API Key', async function (this: ICustomWorld, path: string) {
+    try {
+        const url = `${API_BASE_URL}${path}`;
+        const config: AxiosRequestConfig = {
+            headers: {
+                'X-API-Key': 'invalid-dummy-key' // Send an incorrect key
+            },
+            validateStatus: () => true,
+        };
+        console.log(`Sending GET request to: ${url} with INVALID API Key`);
+        this.response = await axios.get(url, config);
+        if (this.response.headers['content-type']?.includes('application/json')) {
+            this.responseData = this.response.data;
+        } else {
+            this.responseData = null;
+        }
+        this.error = undefined;
+        console.log(`Received status code: ${this.response.status}`);
+    } catch (err) {
+        console.error('Error during GET request (invalid key):', err);
+        this.error = err;
+        this.response = undefined;
+        this.responseData = undefined;
+    }
 });

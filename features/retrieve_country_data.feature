@@ -22,6 +22,16 @@ Feature: Retrieve Country and Currency Data
     And the response list should contain an entry with "isoAlpha2Code" "GB"
     # Add more specific checks as needed based on the expected data source
 
+  Scenario: Attempt to retrieve countries without API Key
+    Given the Country/Currency service is running
+    When I send a GET request to "/countries" without an API Key # New step needed
+    Then the response status code should be 401
+
+  Scenario: Attempt to retrieve countries with an invalid API Key
+    Given the Country/Currency service is running
+    When I send a GET request to "/countries" with an invalid API Key # New step needed
+    Then the response status code should be 401
+
   # Optional: Add scenarios for error handling if specific error responses are defined
   # e.g., Scenario: Requesting an invalid endpoint
   #   When I send a GET request to "/invalid_endpoint"
