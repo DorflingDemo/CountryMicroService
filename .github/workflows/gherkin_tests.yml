@@ -28,6 +28,3 @@ jobs:
       # It requires step definitions written in TypeScript to exist.
       # IMPORTANT: This step currently ASSUMES the microservice API is running and accessible.
       # We will need to add steps later to either start the service or configure the target URL.
-      env:
-        # Example: Set base URL for tests if needed later
-        # API_BASE_URL: http://localhost:3000
