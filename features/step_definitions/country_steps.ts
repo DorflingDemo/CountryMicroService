@@ -23,7 +23,8 @@ interface ICustomWorld {
 
 // --- Step Definitions ---
 
-Given('the Country/Currency service is running', function () { // Reverted slash escaping
+// Use explicit regex anchors /^...$/ to force exact matching
+Given(/^the Country\/Currency service is running$/, function () {
     // This step is often used to ensure preconditions are met.
     // For now, we assume the service is running externally.
     // Later, this could involve health checks or setup steps.
@@ -93,8 +94,8 @@ Then('each item in the JSON array should have an {string} string field matching 
     }
 });
 
-// Replace the old step definition with this one:
-Then('the response list should contain an entry with {string} {string}', function (this: ICustomWorld, key: string, value: string) {
+// Use explicit regex anchors /^...$/ and capture groups for parameters
+Then(/^the response list should contain an entry with "([^"]*)" "([^"]*)"$/, function (this: ICustomWorld, key: string, value: string) {
     assert.ok(Array.isArray(this.responseData), 'Response data is not an array');
 
     const found = this.responseData.some((item: any) => {

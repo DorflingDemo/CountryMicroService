@@ -17,12 +17,19 @@ const countriesDataPath = path.join(__dirname, '../data/countries.json');
 
 // Load and parse country data from JSON file
 let allCountries: Country[] = [];
-try {
-    const jsonData = fs.readFileSync(countriesDataPath, 'utf-8');
-    allCountries = JSON.parse(jsonData);
-    console.log(`Successfully loaded ${allCountries.length} countries from ${countriesDataPath}`);
-} catch (error) {
-    console.error(`Error loading country data from ${countriesDataPath}:`, error);
+console.log(`Attempting to load country data from: ${countriesDataPath}`); // Added log
+if (fs.existsSync(countriesDataPath)) { // Added check
+    console.log(`File found at: ${countriesDataPath}`);
+    try {
+        const jsonData = fs.readFileSync(countriesDataPath, 'utf-8');
+        allCountries = JSON.parse(jsonData);
+        console.log(`Successfully loaded ${allCountries.length} countries.`);
+    } catch (error) {
+        console.error(`Error parsing JSON data from ${countriesDataPath}:`, error);
+        // Decide how to handle parsing errors - exit or continue with empty data?
+    }
+} else {
+    console.error(`Error: Data file not found at ${countriesDataPath}`);
     // In a real app, you might want to exit or have better error handling
     // For now, log the error and continue with an empty array.
 }
