@@ -18,14 +18,14 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@cucumber/cucumber": "^10.0.0", // Cucumber.js core
-    "@types/express": "^4.17.21",   // TypeScript types for Express
-    "@types/node": "^18.0.0",       // TypeScript types for Node.js
-    "axios": "^1.6.0",              // HTTP client (for tests)
-    "ts-node": "^10.9.0",           // To run TypeScript directly
-    "typescript": "^5.0.0"          // TypeScript compiler
+    "@cucumber/cucumber": "^10.0.0",
+    "@types/express": "^4.17.21",
+    "@types/node": "^18.0.0",
+    "axios": "^1.6.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
   },
   "dependencies": {
-    "express": "^4.18.2"            // Express framework
+    "express": "^4.18.2"
   }
 }
