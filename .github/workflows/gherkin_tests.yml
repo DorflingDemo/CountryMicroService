@@ -20,11 +20,13 @@ jobs:
 
     - name: Install dependencies
       run: npm install # Installs dependencies listed in package.json
-      # We will create package.json next
+
+    - name: Build TypeScript
+      run: npm run build # Compile TypeScript to JavaScript
 
     - name: Run Cucumber tests
       run: npx cucumber-js features/**/*.feature
       # This command tells cucumber-js to find .feature files
-      # It requires step definitions written in TypeScript to exist.
+      # It requires step definitions written in TypeScript to exist (compiled in the previous step).
       # IMPORTANT: This step currently ASSUMES the microservice API is running and accessible.
       # We will need to add steps later to either start the service or configure the target URL.

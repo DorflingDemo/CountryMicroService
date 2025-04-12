@@ -4,6 +4,6 @@ module.exports = {
     requireModule: ['ts-node/register'], // Use ts-node to run TypeScript files
     require: ['features/step_definitions/**/*.ts'], // Look for step definitions here
     format: ['progress-bar', 'json:reports/cucumber-report.json'], // Output formats
-    publishQuiet: true,
+    // publishQuiet: true, // Removed as it's deprecated and no longer needed
   }
 };
