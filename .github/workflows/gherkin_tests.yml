@@ -27,6 +27,14 @@ jobs:
     - name: Verify build output # <-- ADD THIS STEP
       run: ls -R dist # List contents of dist directory recursively
 
+    - name: Start server in background
+      run: npm start & # Start the server using the script defined in package.json, run in background
+      # The '&' runs the command in the background
+
+    - name: Wait for server to be ready
+      run: npx wait-on http://localhost:3000/countries -t 15000 # Wait for the /countries endpoint, timeout after 15s
+      # wait-on was installed via package.json devDependencies
+
     - name: Run Cucumber tests
       run: npx cucumber-js features/**/*.feature -c cucumber.js # Explicitly specify the config file
       # This command tells cucumber-js to find .feature files using the specified config.
