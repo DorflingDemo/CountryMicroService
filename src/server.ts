@@ -4,7 +4,14 @@ import express, { Request, Response, Application, NextFunction } from 'express';
 
 // Load environment variables from .env file
 import dotenv from 'dotenv';
-dotenv.config();
+const envLoadResult = dotenv.config(); // Store result
+
+if (envLoadResult.error) {
+  console.warn(`Warning: Server could not load .env file. API_KEY might be missing. Error: ${envLoadResult.error.message}`);
+  // Consider if the server should exit if .env is critical
+} else {
+  console.log('Server: .env file loaded successfully.');
+}
 
 // Define Country interface (without currencies)
 interface Country {
