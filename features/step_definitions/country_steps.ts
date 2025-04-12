@@ -5,12 +5,10 @@ import assert from 'assert';
 // Increase default timeout for potential API calls
 setDefaultTimeout(10 * 1000);
 
-// Define a simple interface for the expected country data structure
-interface Currency extends String {} // Using String for basic type check, can be refined
+// Define the interface for the expected country data structure (matching server.ts)
 interface Country {
     countryName: string;
     isoAlpha2Code: string;
-    currencies: Currency[];
 }
 
 // Define the base URL for the API. Replace with environment variable or configuration later.
@@ -95,41 +93,14 @@ Then('each item in the JSON array should have an {string} string field matching 
     }
 });
 
-Then('each item in the JSON array should have a {string} array field', function (this: ICustomWorld, fieldName: string) {
-    assert.ok(Array.isArray(this.responseData), 'Response data is not an array');
-    assert.ok(this.responseData.length > 0, 'Response array is empty, cannot check items');
-
-    for (const item of this.responseData) {
-        assert.ok(item.hasOwnProperty(fieldName), `Item missing property "${fieldName}": ${JSON.stringify(item)}`);
-        assert.ok(Array.isArray(item[fieldName]), `Expected field "${fieldName}" to be an array, but got ${typeof item[fieldName]} in item: ${JSON.stringify(item)}`);
-    }
-});
-
-Then('each currency code within the {string} array should be a string matching the format {string}', function (this: ICustomWorld, fieldName: string, format: string) {
-    assert.ok(Array.isArray(this.responseData), 'Response data is not an array');
-    assert.ok(this.responseData.length > 0, 'Response array is empty, cannot check items');
-    const regex = new RegExp(`^${format}$`); // Anchor the regex
-
-    for (const item of this.responseData) {
-        assert.ok(item.hasOwnProperty(fieldName) && Array.isArray(item[fieldName]), `Item missing array property "${fieldName}": ${JSON.stringify(item)}`);
-
-        for (const currencyCode of item[fieldName]) {
-            assert.strictEqual(typeof currencyCode, 'string', `Expected currency code to be a string, but got ${typeof currencyCode} in item: ${JSON.stringify(item)}`);
-            assert.ok(regex.test(currencyCode), `Expected currency code "${currencyCode}" to match format "${format}" in item: ${JSON.stringify(item)}`);
-        }
-    }
-});
-
-Then('the response list should contain an entry with {string} {string} and {string} including {string}', function (this: ICustomWorld, key1: string, value1: string, key2: string, value2: string) {
+// Replace the old step definition with this one:
+Then('the response list should contain an entry with {string} {string}', function (this: ICustomWorld, key: string, value: string) {
     assert.ok(Array.isArray(this.responseData), 'Response data is not an array');
 
     const found = this.responseData.some((item: any) => {
-        // Check if item has both keys and the values match
-        const key1Match = item.hasOwnProperty(key1) && item[key1] === value1;
-        // Check if key2 is an array and includes value2
-        const key2Match = item.hasOwnProperty(key2) && Array.isArray(item[key2]) && item[key2].includes(value2);
-        return key1Match && key2Match;
+        // Check if item has the key and the value matches
+        return item.hasOwnProperty(key) && item[key] === value;
     });
 
-    assert.ok(found, `Expected to find an item with ${key1}="${value1}" and ${key2} including "${value2}", but none found.`);
+    assert.ok(found, `Expected to find an item with ${key}="${value}", but none found.`);
 });
