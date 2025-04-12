@@ -1,0 +1,26 @@
+{
+  "name": "country-currency-tests",
+  "version": "1.0.0",
+  "description": "Gherkin tests for the Country/Currency microservice",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js features/**/*.feature"
+  },
+  "keywords": [
+    "gherkin",
+    "cucumber",
+    "typescript",
+    "api",
+    "test"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "^10.0.0", // Cucumber.js core
+    "@types/node": "^18.0.0",       // TypeScript types for Node.js
+    "axios": "^1.6.0",              // HTTP client
+    "ts-node": "^10.9.0",           // To run TypeScript directly
+    "typescript": "^5.0.0"          // TypeScript compiler
+  },
+  "dependencies": {}
+}

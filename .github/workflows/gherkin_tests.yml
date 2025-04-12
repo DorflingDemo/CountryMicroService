@@ -1,0 +1,33 @@
+name: Run Gherkin Tests (TypeScript)
+
+on:
+  push:
+    branches: [ main ] # Or your primary branch
+  pull_request:
+    branches: [ main ] # Or your primary branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest # Use a standard GitHub-hosted Linux runner
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v4 # Action to get your repository code
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18' # Choose a suitable LTS Node.js version
+
+    - name: Install dependencies
+      run: npm install # Installs dependencies listed in package.json
+      # We will create package.json next
+
+    - name: Run Cucumber tests
+      run: npx cucumber-js features/**/*.feature
+      # This command tells cucumber-js to find .feature files
+      # It requires step definitions written in TypeScript to exist.
+      # IMPORTANT: This step currently ASSUMES the microservice API is running and accessible.
+      # We will need to add steps later to either start the service or configure the target URL.
+      env:
+        # Example: Set base URL for tests if needed later
+        # API_BASE_URL: http://localhost:3000
