@@ -12,8 +12,8 @@ interface Country {
 const app: Application = express();
 const PORT: number = parseInt(process.env.PORT || '3000', 10);
 
-// Define path to the data file - relative to the compiled JS file in 'dist'
-const countriesDataPath = path.join(__dirname, '../data/countries.json');
+// Define path to the data file - relative to the compiled JS file in 'dist/src'
+const countriesDataPath = path.join(__dirname, '../../data/countries.json'); // Adjusted path: ../../
 
 // Load and parse country data from JSON file
 let allCountries: Country[] = [];
