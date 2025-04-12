@@ -24,6 +24,9 @@ jobs:
     - name: Build TypeScript
       run: npm run build # Compile TypeScript to JavaScript
 
+    - name: Verify build output # <-- ADD THIS STEP
+      run: ls -R dist # List contents of dist directory recursively
+
     - name: Run Cucumber tests
       run: npx cucumber-js features/**/*.feature
       # This command tells cucumber-js to find .feature files
