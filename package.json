@@ -19,7 +19,6 @@
   "license": "ISC",
   "devDependencies": {
     "@cucumber/cucumber": "^10.0.0",
-    // "@types/axios": "^0.14.0", // Removed: axios includes its own types now
     "@types/express": "^4.17.21",
     "@types/node": "^18.0.0",
     "axios": "^1.6.0",
