@@ -24,12 +24,12 @@ Feature: Retrieve Country and Currency Data
 
   Scenario: Attempt to retrieve countries without API Key
     Given the Country/Currency service is running
-    When I send a GET request to "/countries" without an API Key # New step needed
+    When I send a GET request to "/countries" without an API Key
     Then the response status code should be 401
 
   Scenario: Attempt to retrieve countries with an invalid API Key
     Given the Country/Currency service is running
-    When I send a GET request to "/countries" with an invalid API Key # New step needed
+    When I send a GET request to "/countries" with an invalid API Key
     Then the response status code should be 401
 
   # Optional: Add scenarios for error handling if specific error responses are defined

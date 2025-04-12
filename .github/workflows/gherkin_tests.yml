@@ -41,7 +41,5 @@ jobs:
       # wait-on was installed via package.json devDependencies
 
     - name: Run Cucumber tests
-      # Explicitly require the compiled step definitions using -r
-      # Temporarily remove -c cucumber.js to simplify and isolate the issue
-      run: npx cucumber-js features/**/*.feature -r dist/features/step_definitions/**/*.js
-      # If this works, we can investigate why cucumber.js wasn't loading steps correctly.
+      # Explicitly require the setup file first, then the step definitions
+      run: npx cucumber-js features/**/*.feature -r dist/features/support/setup.js -r dist/features/step_definitions/**/*.js
