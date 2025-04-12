@@ -1,6 +1,10 @@
 import fs from 'fs';
 import path from 'path';
-import express, { Request, Response, Application } from 'express';
+import express, { Request, Response, Application, NextFunction } from 'express'; // Added NextFunction
+
+// Load environment variables from .env file
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Define Country interface (without currencies)
 interface Country {

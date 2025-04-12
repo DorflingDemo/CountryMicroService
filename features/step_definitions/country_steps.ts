@@ -1,6 +1,10 @@
 import { Given, When, Then, DataTable, setDefaultTimeout } from '@cucumber/cucumber';
-import axios, { AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from 'axios'; // Added AxiosRequestConfig
 import assert from 'assert';
+
+// Load environment variables (needed for API_KEY)
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Increase default timeout for potential API calls
 setDefaultTimeout(10 * 1000);
