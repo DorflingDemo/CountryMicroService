@@ -23,7 +23,7 @@ interface ICustomWorld {
 
 // --- Step Definitions ---
 
-Given('the Country\\/Currency service is running', function () { // Escaped the forward slash
+Given('the Country/Currency service is running', function () { // Reverted slash escaping
     // This step is often used to ensure preconditions are met.
     // For now, we assume the service is running externally.
     // Later, this could involve health checks or setup steps.
