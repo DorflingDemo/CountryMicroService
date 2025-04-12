@@ -28,8 +28,8 @@ jobs:
       run: ls -R dist # List contents of dist directory recursively
 
     - name: Run Cucumber tests
-      run: npx cucumber-js features/**/*.feature
-      # This command tells cucumber-js to find .feature files
-      # It requires step definitions written in TypeScript to exist (compiled in the previous step).
+      run: npx cucumber-js features/**/*.feature -c cucumber.js # Explicitly specify the config file
+      # This command tells cucumber-js to find .feature files using the specified config.
+      # The config points to the compiled JS step definitions.
       # IMPORTANT: This step currently ASSUMES the microservice API is running and accessible.
       # We will need to add steps later to either start the service or configure the target URL.
