@@ -6,7 +6,7 @@
   "scripts": {
     "test": "cucumber-js features/**/*.feature",
     "build": "tsc",
-    "start": "node dist/src/server.js" # Updated path
+    "start": "node dist/src/server.js"
   },
   "keywords": [
     "gherkin",
