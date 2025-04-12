@@ -1,9 +1,8 @@
-// This configuration tells Cucumber where to find step definitions and how to run them with ts-node
+// This configuration tells Cucumber where to find the compiled JavaScript step definitions
 module.exports = {
   default: {
-    requireModule: ['ts-node/register'], // Use ts-node to run TypeScript files
-    require: ['features/step_definitions/**/*.ts'], // Look for step definitions here
+    // requireModule: ['ts-node/register'], // Removed: No longer needed as we compile first
+    require: ['dist/features/step_definitions/**/*.js'], // Look for compiled JS step definitions in dist
     format: ['progress-bar', 'json:reports/cucumber-report.json'], // Output formats
-    // publishQuiet: true, // Removed as it's deprecated and no longer needed
   }
 };
