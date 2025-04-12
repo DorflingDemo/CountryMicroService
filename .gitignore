@@ -1,2 +1,29 @@
+# Aider
 .aider*
 notes.txt
+
+# Node
+node_modules/
+
+# TypeScript compilation output
+dist/
+
+# Build artifacts
+build/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Test reports
+reports/
+coverage/
+*.lcov

@@ -2,15 +2,17 @@
   "compilerOptions": {
     "target": "ES2016", // Or a newer target like ES2020
     "module": "CommonJS", // Standard module system for Node.js
-    "outDir": "./dist", // Optional: specify output directory if compiling
-    "rootDir": "./",    // Root directory of source files
+    "outDir": "./dist", // Specify output directory for compiled JS
+    "rootDir": "./src",    // Root directory of source TS files
     "strict": true,     // Enable strict type checking
     "esModuleInterop": true, // Allows default imports from commonjs modules
     "skipLibCheck": true, // Skip type checking of declaration files
-    "forceConsistentCasingInFileNames": true // Ensure consistent file casing
+    "forceConsistentCasingInFileNames": true, // Ensure consistent file casing
+    "resolveJsonModule": true // Allow importing JSON files
   },
   "include": [
-    "features/**/*.ts" // Include TypeScript files in the features directory
+    "src/**/*.ts", // Include TypeScript files in the src directory
+    "features/**/*.ts" // Include TypeScript files for tests
   ],
   "exclude": [
     "node_modules"
