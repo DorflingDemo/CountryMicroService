@@ -27,17 +27,17 @@ jobs:
     - name: Verify build output # <-- ADD THIS STEP
       run: ls -R dist # List contents of dist directory recursively
 
-    - name: Start server in background
-      run: npm start & # Start the server using the script defined in package.json, run in background
-      # The '&' runs the command in the background
+    - name: Start server in background using nohup
+      run: nohup npm start > server.log 2>&1 & # Use nohup, redirect stdout/stderr to server.log, run in background
+      # nohup prevents the process from stopping when the shell exits
+      # Output is redirected to server.log for debugging if needed
 
     - name: Wait for server to be ready
       run: npx wait-on http://localhost:3000/countries -t 15000 # Wait for the /countries endpoint, timeout after 15s
       # wait-on was installed via package.json devDependencies
 
     - name: Run Cucumber tests
-      run: npx cucumber-js features/**/*.feature -c cucumber.js # Explicitly specify the config file
-      # This command tells cucumber-js to find .feature files using the specified config.
-      # The config points to the compiled JS step definitions.
-      # IMPORTANT: This step currently ASSUMES the microservice API is running and accessible.
-      # We will need to add steps later to either start the service or configure the target URL.
+      # Explicitly require the compiled step definitions using -r
+      # Temporarily remove -c cucumber.js to simplify and isolate the issue
+      run: npx cucumber-js features/**/*.feature -r dist/features/step_definitions/**/*.js
+      # If this works, we can investigate why cucumber.js wasn't loading steps correctly.
