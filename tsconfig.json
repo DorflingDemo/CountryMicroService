@@ -3,7 +3,7 @@
     "target": "ES2016", // Or a newer target like ES2020
     "module": "CommonJS", // Standard module system for Node.js
     "outDir": "./dist", // Specify output directory for compiled JS
-    "rootDir": "./src",    // Root directory of source TS files
+    // "rootDir": "./src", // Removed: Let TS infer the root directory
     "strict": true,     // Enable strict type checking
     "esModuleInterop": true, // Allows default imports from commonjs modules
     "skipLibCheck": true, // Skip type checking of declaration files
