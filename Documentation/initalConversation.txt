@@ -1,0 +1,31 @@
+**Stakeholder:** Hi, thanks for meeting with me today. We've got a challenge related to keeping our country and currency data accurate and up to date across our apps. 
+Currently, every team manually manages these lists, and it's causing inconsistencies and extra overhead.
+
+**Project Manager:** That sounds cumbersome. Could you describe exactly what's needed to improve this?
+
+**Stakeholder:** Sure. What we need is a simple, centralized microservice. It should provide a constantly updated list of countries, their ISO 3166 codes, and the relevant 
+currencies.
+
+**Project Manager:** Understood. So, you'd like a single source of truth that ensures everyone pulls from the same, reliable dataset?
+
+**Stakeholder:** Exactly. Right now, every time there's a geopolitical change or currency update, multiple teams scramble to update their own data separately. This often 
+leads to errors and delays.
+
+**Project Manager:** Got it. How frequently does this information typically change?
+
+**Stakeholder:** Not too often, but when it does, it's crucial that all our services reflect those updates promptly. Ideally, we wouldn't have to worry about manual updates 
+at all.
+
+**Project Manager:** So, automation and accuracy are key here. Would the teams need additional information besides countries, ISO codes, and currencies?
+
+**Stakeholder:** At the moment, no. But it would be good if the microservice was built in a way that we could expand it easily if needed.
+
+**Project Manager:** Makes sense. One more thing—how critical is performance? Should we optimize for speed, availability, or both?
+
+**Stakeholder:** Definitely both. Availability is essential because downtime would affect multiple applications, and speed ensures user experience stays smooth.
+
+**Project Manager:** Understood clearly. We'll focus on building something reliable, fast, and easy to maintain.
+
+**Stakeholder:** Perfect. Let me know if you need anything else to get started.
+
+
